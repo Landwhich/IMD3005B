@@ -16,14 +16,45 @@ void ofApp::setup(){
 	
 	plane.set(planeWidth, planeHeight, planeColums, planeRows, OF_PRIMITIVE_TRIANGLES);
 
-	planet.loadModel("Mars2K.obj");
-	m_marsPos = ofVec2f(ofGetWindowWidth() / 2.0, ofGetWindowHeight() / 2.0);
-	ofLogNotice() << "Model loaded: " << planet.getNumMeshes();
+	ofDisableArbTex();
+	ofLoadImage(marsTexture, "Diffuse_2K.png");
+	ofLoadImage(moonTexture, "Diffuse_2K_moon.png");
+	ofLoadImage(solTexture, "2k_sun.jpg");
+
+	sol.loadModel("sol.obj");
+	m_solPos = ofVec2f(ofGetWindowWidth() / 2.0, ofGetWindowHeight() / 2.0);
+	// ofLogNotice() << "Model loaded: " << sol.getNumMeshes();
+
+	mars.loadModel("Mars2K.obj");
+	m_marsPos = ofVec2f(-600, 0);
+
+	mars2.loadModel("Mars2K.obj");
+	m_marsPos2 = ofVec2f(500, 0);
+
+	mars3.loadModel("Mars2K.obj");
+	m_marsPos3 = ofVec2f(0, 350);
+
+	mars4.loadModel("Mars2K.obj");
+	m_marsPos4 = ofVec2f(0, -400);
+
+	phobos.loadModel("Moon2K.obj");
+	m_phobosPos = ofVec2f(0, 500);
+
+	deimos.loadModel("Moon2K.obj");
+	m_deimosPos = ofVec2f(0, 500);
+
+	m_rotFast = 0.0f;
+	m_rotMed = 0.0f;
+	m_rotSlow = 0.0f;
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+
+	m_rotFast += 0.15;
+	m_rotMed += 0.075;
+	m_rotSlow += 0.035;
 
 }
 
@@ -73,9 +104,79 @@ void ofApp::draw(){
 	shader.end();
 
 	ofPushMatrix();
-		ofTranslate(m_marsPos);
+		ofTranslate(m_solPos);
+		ofRotateDeg(m_rotMed);
 		ofScale(0.25, 0.25, 0.25);
-		planet.drawFaces();
+		solTexture.bind();
+		sol.drawFaces();
+		solTexture.unbind();
+	ofPopMatrix();
+
+	ofPushMatrix();
+
+		ofTranslate(m_solPos);
+		ofScale(0.5, 0.5, 0.5);
+
+		ofPushMatrix();
+			ofRotateDeg(m_rotMed);
+			ofTranslate(m_marsPos);
+			ofRotateDeg(m_rotMed);
+			ofScale(0.25, 0.25, 0.25);
+			marsTexture.bind();
+			mars.drawFaces();
+			marsTexture.unbind();
+
+			ofPushMatrix();
+				ofRotateDeg(m_rotFast);
+				ofTranslate(m_phobosPos);
+				ofRotateDeg(m_rotFast);
+				ofScale(0.25, 0.25, 0.25);
+				moonTexture.bind();
+				phobos.drawFaces();
+				moonTexture.unbind();
+			ofPopMatrix();
+
+		ofPopMatrix();
+
+		ofPushMatrix();
+			ofRotateDeg(m_rotSlow);
+			ofTranslate(m_marsPos2);
+			ofRotateDeg(m_rotSlow);
+			ofScale(0.35, 0.35, 0.35);
+			marsTexture.bind();
+			mars2.drawFaces();
+			marsTexture.unbind();
+
+			ofPushMatrix();
+				ofRotateDeg(m_rotFast * 2);
+				ofTranslate(m_deimosPos);
+				ofRotateDeg(m_rotFast);
+				ofScale(0.25, 0.25, 0.25);
+				moonTexture.bind();
+				deimos.drawFaces();
+				moonTexture.unbind();
+			ofPopMatrix();
+
+		ofPopMatrix();
+
+		ofPushMatrix();
+			ofRotateDeg(m_rotMed);
+			ofTranslate(m_marsPos3);
+			ofRotateDeg(m_rotMed);
+			ofScale(0.2, 0.2, 0.2);
+			marsTexture.bind();
+			mars3.drawFaces();
+		ofPopMatrix();
+
+		ofPushMatrix();
+			ofRotateDeg(m_rotFast);
+			ofTranslate(m_marsPos4);
+			ofRotateDeg(m_rotFast);
+			ofScale(0.5, 0.5, 0.5);
+			mars4.drawFaces();
+			marsTexture.unbind();
+		ofPopMatrix();
+
 	ofPopMatrix();
 }
 

@@ -6,9 +6,31 @@
 class ofApp : public ofBaseApp{
 	public:
 		
-	// planet 1
-	ofVec2f m_marsPos; 
-	ofxAssimpModelLoader planet;
+	// entity models
+	ofxAssimpModelLoader sol;
+	ofxAssimpModelLoader mars; // too lazy to get unique planet models
+	ofxAssimpModelLoader mars2;
+	ofxAssimpModelLoader mars3;
+	ofxAssimpModelLoader mars4;
+	ofxAssimpModelLoader phobos;
+	ofxAssimpModelLoader deimos;
+
+	// entity textures
+	ofTexture marsTexture;
+	ofTexture moonTexture;
+	ofTexture solTexture;
+
+	// entity attributes
+	ofVec2f m_solPos;
+	ofVec2f m_marsPos;
+	ofVec2f m_marsPos2;
+	ofVec2f m_marsPos3;
+	ofVec2f m_marsPos4;
+	float m_rotFast;
+	float m_rotMed;
+	float m_rotSlow;
+	ofVec2f m_phobosPos;
+	ofVec2f m_deimosPos;
 
 	void setup();
 	void update();
