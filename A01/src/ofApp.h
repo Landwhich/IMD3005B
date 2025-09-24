@@ -6,6 +6,9 @@
 class ofApp : public ofBaseApp{
 	public:
 		
+	ofCamera camera; 
+	ofLight light;
+
 	// entity models
 	ofxAssimpModelLoader sol;
 	ofxAssimpModelLoader mars; // too lazy to get unique planet models

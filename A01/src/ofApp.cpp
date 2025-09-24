@@ -16,6 +16,17 @@ void ofApp::setup(){
 	
 	plane.set(planeWidth, planeHeight, planeColums, planeRows, OF_PRIMITIVE_TRIANGLES);
 
+	camera.setFov(60);
+	camera.setPosition(ofVec3f(ofGetWindowWidth() / 2, ofGetWindowHeight() * 1.2, 400));
+	camera.lookAt(ofVec3f(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2, 0));
+	camera.setVFlip(true);
+
+	ofDisableAlphaBlending();
+	ofEnableDepthTest();
+	light.enable();
+	light.setPosition(ofVec3f(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2, 500));
+    light.lookAt(ofVec3f(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2, 300));
+
 	ofDisableArbTex();
 	ofLoadImage(marsTexture, "Diffuse_2K.png");
 	ofLoadImage(moonTexture, "Diffuse_2K_moon.png");
@@ -96,6 +107,8 @@ void ofApp::draw(){
 	// inside the shader these four values are set inside a vec4 object.
 	shader.setUniform4fv("mouseColor", mouseColor);
 	
+	camera.begin();
+
 	ofPushMatrix();
 		ofTranslate(cx, cy);
 		plane.drawWireframe();
@@ -104,12 +117,15 @@ void ofApp::draw(){
 	shader.end();
 
 	ofPushMatrix();
+		ofDisableLighting();
+		ofSetColor(255, 255, 255);  
 		ofTranslate(m_solPos);
 		ofRotateDeg(m_rotMed);
 		ofScale(0.25, 0.25, 0.25);
 		solTexture.bind();
 		sol.drawFaces();
 		solTexture.unbind();
+		ofEnableLighting();
 	ofPopMatrix();
 
 	ofPushMatrix();
@@ -178,6 +194,8 @@ void ofApp::draw(){
 		ofPopMatrix();
 
 	ofPopMatrix();
+
+	camera.end();
 }
 
 //--------------------------------------------------------------
