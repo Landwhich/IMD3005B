@@ -32,6 +32,12 @@ void ofApp::setup(){
 	ofLoadImage(moonTexture, "Diffuse_2K_moon.png");
 	ofLoadImage(solTexture, "2k_sun.jpg");
 
+	bool loaded = rocketFont.load("nasa.otf", 128, true, true, false);
+	// ofLogNotice() << "Font loaded: " << (loaded ? "YES" : "NO");
+
+	rocketImage.load("rocket.png");
+	rocketImage.setAnchorPercent(0.5,0.5);
+
 	sol.loadModel("sol.obj");
 	m_solPos = ofVec2f(ofGetWindowWidth() / 2.0, ofGetWindowHeight() / 2.0);
 	// ofLogNotice() << "Model loaded: " << sol.getNumMeshes();
@@ -58,6 +64,8 @@ void ofApp::setup(){
 	m_rotMed = 0.0f;
 	m_rotSlow = 0.0f;
 
+	m_mousePos = ofVec2f((float)0.0,(float)0.0);
+
 }
 
 //--------------------------------------------------------------
@@ -67,6 +75,24 @@ void ofApp::update(){
 	m_rotMed += 0.075;
 	m_rotSlow += 0.035;
 
+	ofVec2f m_oldMousePos = m_mousePos;
+	m_mousePos.set((float)ofGetMouseX(), (float)ofGetMouseY());
+
+	m_rocketPos.set(m_mousePos);
+
+	//smoke
+
+	float dt = ofGetLastFrameTime();
+
+    for (auto& p : smokeParticles) {
+        p.update(dt);
+    }
+
+    smokeParticles.erase(
+        std::remove_if(smokeParticles.begin(), smokeParticles.end(),
+            [](const SmokeParticle& p) { return p.isDead(); }),
+        smokeParticles.end()
+    );
 }
 
 //--------------------------------------------------------------
@@ -106,15 +132,17 @@ void ofApp::draw(){
 	// we do this by passing a pointer reference to the first element in the array.
 	// inside the shader these four values are set inside a vec4 object.
 	shader.setUniform4fv("mouseColor", mouseColor);
-	
+
 	camera.begin();
 
 	ofPushMatrix();
 		ofTranslate(cx, cy);
 		plane.drawWireframe();
 	ofPopMatrix();
-	
+
 	shader.end();
+
+	rocketFont.drawString("click to create smoke", ofGetWindowWidth() / 2 - 850, ofGetWindowHeight() * -0.5);
 
 	ofPushMatrix();
 		ofDisableLighting();
@@ -195,6 +223,19 @@ void ofApp::draw(){
 
 	ofPopMatrix();
 
+	ofPushMatrix();
+		ofTranslate(m_rocketPos);
+		ofScale(0.05, 0.05);
+		rocketImage.draw(0,0);
+	ofPopMatrix();
+
+	ofPushMatrix();
+		// ofTranslate(m_mousePos);
+		for (auto& p : smokeParticles) {
+        	p.draw();
+    	}
+	ofPopMatrix();
+
 	camera.end();
 }
 
@@ -219,9 +260,12 @@ void ofApp::draw(){
 // }
 
 // //--------------------------------------------------------------
-// void ofApp::mousePressed(int x, int y, int button){
 
-// }
+void ofApp::mousePressed(int x, int y, int button){
+    for (int i = 0; i < 10; i++) {
+        smokeParticles.push_back(SmokeParticle(ofVec2f(x, y)));
+    }
+}
 
 // //--------------------------------------------------------------
 // void ofApp::mouseReleased(int x, int y, int button){
