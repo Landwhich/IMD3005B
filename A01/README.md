@@ -1,9 +1,11 @@
 # Questions for the Assignment
 
-## *Disclaimer* 
+### *Disclaimer!* 
 The assets (models, textures, images, fonts) and (Blue / Pink geometric shader are not mine and have been used in junction with my own work to amplify it)
 
-![Assignment one planet exercise](../readmeAssets/A01.gif)
+<video width="480px" autoplay controls>
+    <source src="../readmeAssets/A01.mp4" type="video/mp4">
+</video>
 
 ## 1. Controls and Design
     I created a horrifically innacurate planet orbit simulator in 3D with lighting and controls. I have a rocket ship following the mouse, which will spew smoke on mouse press. There are four planets orbitting the sun with two of them having a moon satellite.
