@@ -3,9 +3,10 @@
 ### *Disclaimer!* 
 The assets (models, textures, images, fonts) and (Blue / Pink geometric shader are not mine and have been used in junction with my own work to amplify it)
 
-<video width="480px" autoplay controls>
+<!-- <video width="480px" autoplay controls>
     <source src="https://raw.githubusercontent.com/Landwhich/IMD3005B/main/readmeAssets/A01.mp4" type="video/mp4">
-</video>
+</video> -->
+<img width="480px" src="../readmeAssets/A01.png">
 
 ## 1. Controls and Design
     I created a horrifically innacurate planet orbit simulator in 3D with lighting and controls. I have a rocket ship following the mouse, which will spew smoke on mouse press. There are four planets orbitting the sun with two of them having a moon satellite.
