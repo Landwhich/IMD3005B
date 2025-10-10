@@ -4,7 +4,7 @@
 The assets (models, textures, images, fonts) and (Blue / Pink geometric shader are not mine and have been used in junction with my own work to amplify it)
 
 <video width="480px" autoplay controls>
-    <source src="../readmeAssets/A01.mp4" type="video/mp4">
+    <source src="https://raw.githubusercontent.com/Landwhich/IMD3005B/main/readmeAssets/A01.mp4" type="video/mp4">
 </video>
 
 ## 1. Controls and Design
