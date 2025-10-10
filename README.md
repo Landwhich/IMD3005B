@@ -6,5 +6,5 @@ Here is where I'll contain all my projects for IMD3005B:
 <!-- <video width="480px" autoplay controls>
     <source src="readmeAssets/A01.mp4" type="video/mp4">
 </video> -->
-<img width="480px" src="../readmeAssets/A01.png">
+<img width="480px" src="https://raw.githubusercontent.com/Landwhich/IMD3005B/refs/heads/main/readmeAssets/A01.png">
 
