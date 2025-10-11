@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxImGui.h"
+#include "Constant.h"
 
 class ofApp : public ofBaseApp{
 

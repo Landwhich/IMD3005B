@@ -1,3 +1,5 @@
 **/obj/
 **/*.so
 **/.DS_Store
+**/*.plist
+**/*.app
