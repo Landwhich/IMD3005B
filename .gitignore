@@ -1,5 +1,10 @@
+**/.DS_Store
+
 **/obj/
 **/*.so
-**/.DS_Store
+**/*.ini
+A02/A02.qbs
+**/bin/A0*
+**/bin/TP
 **/*.plist
 **/*.app
