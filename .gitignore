@@ -1,9 +1,11 @@
+# Dev files
 **/.DS_Store
 
+# Binaries
 **/obj/
 **/*.so
 **/*.ini
-A02/A02.qbs
+**/*.qbs
 **/bin/A0*
 **/bin/TP
 **/*.plist
