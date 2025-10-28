@@ -23,11 +23,23 @@ class ofApp : public ofBaseApp{
     
         void applyBrightness(float &intensity);
         void applyContrast(float &intensity);
+        // 3X3 CONV MATRICES
         void enableSharpenFilter();
-		void enableEdgeDetectionFilter();
+		void enableVerticalEdgeDetectionFilter();
+        void enableHorizontalEdgeDetectionFilter();
 		void enableEmbossFilter();
         void enableBoxBlurFilter();
+        void enableEdgeEnhanceFilter();
+        // 5X5 CONV MATRICES
+        void enableGaussianBlurFilter();
+        void enableBoxBlur5X5Filter();
+        void enableSharpen5X5Filter();
+        void enableEdgeDetection5X5Filter();
+        void enableEmboss5X5Filter();
+
         void applyConvolution3x3(Constants::CONVOLUTION_MAT_TYPE matType);
+        void applyConvolution5x5(Constants::CONVOLUTION_MAT_TYPE matType);
+        // float[] rotate5x5Matrix(float[] matrix)
 
 		//some extra functions you may want to explore
         void convertGrayscale(int x, int y);
