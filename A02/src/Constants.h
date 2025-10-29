@@ -8,7 +8,11 @@ namespace Constants {
     static const int FRAMERATE = 60;
 
     // static const std::string IMG_PATH = "happyTurtle.avif";
-    static const std::string IMG_PATH = "JupiterFromJunoSmall.jpg";
+    static const std::string IMG_PATHS[3] = {
+        "JupiterFromJunoSmall.jpg",
+        "EarthFromSpace.png",
+        "MarsFromSpace.png",
+    };
 
         enum CONVOLUTION_MAT_TYPE {
         SHARPEN             = 0,

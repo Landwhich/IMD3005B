@@ -9,10 +9,14 @@ class ofApp : public ofBaseApp{
 	public:
 		ofImage m_origImg;
         ofImage m_edittedImg;
+        int m_imgIdx;
     
         //GUI stuff
         float m_brightness;
         float m_contrast;
+        // eyedropper GUI
+        ofColor m_eyeDropperColor;
+        bool m_eyeDropperActive = false;
     
         ofxImGui::Gui m_gui;
     
@@ -41,11 +45,11 @@ class ofApp : public ofBaseApp{
         void applyConvolution5x5(Constants::CONVOLUTION_MAT_TYPE matType);
         // float[] rotate5x5Matrix(float[] matrix)
 
+        // void eyeDropper();
 		//some extra functions you may want to explore
-        void convertGrayscale(int x, int y);
-		ofColor eyeDropper(int x, int y);
-		void paint(ofColor color);
-		ofRectangle magicWand(int x, int y);
+        // void convertGrayscale(int x, int y);
+		// void paint(ofColor color);
+		// ofRectangle magicWand(int x, int y);
 
 		void keyPressed(int key);
         void mousePressed(int x, int y, int button);

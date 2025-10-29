@@ -4,8 +4,10 @@ void ofApp::setup(){
     ofSetWindowShape(Constants::WINDOW_WIDTH, Constants::WINDOW_HEIGHT);
     ofSetFrameRate(Constants::FRAMERATE);
     
-    m_origImg.load(Constants::IMG_PATH);
+    m_imgIdx = 0;
+    m_origImg.load(Constants::IMG_PATHS[m_imgIdx]);
 	m_edittedImg = m_origImg; //this clones data
+    m_eyeDropperColor.set(0,0,0);
     
     //for some really cool projects that use "dear imgui" https://github.com/ocornut/imgui/wiki/Software-using-dear-imgui
     m_gui.setup();
@@ -94,12 +96,36 @@ void ofApp::draw(){
                 enableEmboss5X5Filter();
             }
 
+            if (ImGui::Button("Prev Img", ofVec2f(ImGui::GetWindowSize().x/3, 30.0f))) {
+                int length = sizeof(Constants::IMG_PATHS) / sizeof(Constants::IMG_PATHS[0]);
+                m_imgIdx = (m_imgIdx - 1 + length) % length;
+                m_origImg.load(Constants::IMG_PATHS[m_imgIdx]);
+                m_edittedImg = m_origImg;
+            }
+            ImGui::SameLine();
+            if (ImGui::Button("Save Image", ofVec2f(ImGui::GetWindowSize().x/3, 30.0f))){
+                m_edittedImg.save("savedImage.png");
+            }
+            ImGui::SameLine();
+            if (ImGui::Button("Next Img", ofVec2f(ImGui::GetWindowSize().x/3, 30.0f))) {
+                int length = sizeof(Constants::IMG_PATHS) / sizeof(Constants::IMG_PATHS[0]);
+                m_imgIdx = (m_imgIdx + 1) % length;
+                m_origImg.load(Constants::IMG_PATHS[m_imgIdx]);
+                m_edittedImg = m_origImg;
+            }
+
         ImGui::End();
         ImGui::SetNextWindowPos(ofVec2f(m_origImg.getWidth() + m_edittedImg.getWidth()/4 + 20, 20), ImGuiCond_Once);
         ImGui::SetNextWindowSize(ofVec2f(580 - m_origImg.getWidth()/4, m_edittedImg.getHeight()/4 - 20), ImGuiCond_Once);
         ImGui::Begin("Eydropper Tool");
-            // ImGui::Text();
-
+            ImGui::Text("EyeDropper color is: R: #%i, G: #%i, B: #%i", m_eyeDropperColor.r, m_eyeDropperColor.g, m_eyeDropperColor.b);
+            ImGui::Spacing();
+            ImGui::PushStyleColor(ImGuiCol_Button, m_eyeDropperColor);
+            if (ImGui::Button("Eye Dropper Tool", ofVec2f(ImGui::GetWindowSize().x, 75.0f))) {
+                // eyeDropper();
+                m_eyeDropperActive = true;
+            }
+            ImGui::PopStyleColor();
         ImGui::End();
             
     m_gui.end();
@@ -347,7 +373,14 @@ void ofApp::keyPressed(int key){
 }
 
 void ofApp::mousePressed(int x, int y, int button){
+    if (m_eyeDropperActive) {
+        // Ensure click is within the image bounds
+        if (x >= 0 && x < m_edittedImg.getWidth() && y >= 0 && y < m_edittedImg.getHeight()) {
+            m_eyeDropperColor = m_edittedImg.getColor(x, y);
 
+            m_eyeDropperActive = false;
+        }
+    }
 }
 
 void ofApp::mouseDragged(int x, int y, int button) {

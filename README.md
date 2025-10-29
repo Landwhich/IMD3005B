@@ -3,6 +3,10 @@ Here is where I'll contain all my projects for IMD3005B a class focused on funda
 
 <u>the repository should be cloned inside of:</u> ``` /of_<version number>_<system>_release/apps/ ```
 
+### Assignment 2
+ <p>A rushed, ☝️ albeit, funtional photo editer, with preset smaple images, 3x3 and 5x5 Convolutional matrix photo effects, an eydropper tool, File IO and brightness + saturation </p>
+<img width="480px" src="https://raw.githubusercontent.com/Landwhich/IMD3005B/refs/heads/main/readmeAssets/A02.png">
+
 ### Assignment 1
  <p>I created a horrifically innacurate planet orbit simulator in 3D with lighting and controls. I have a rocket ship following the mouse, which will spew smoke on mouse press. There are four planets orbitting the sun with two of them having a moon satellite.</p>
 <!-- <video width="480px" autoplay controls>
